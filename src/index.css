@@ -1,0 +1,219 @@
+:root {
+  --color-bg: #EAE8E3;
+  /* Concrete/Plaster */
+  --color-surface: #D7D3CC;
+  /* Darker Concrete */
+  --color-text: #111111;
+  /* Off-Black Ink */
+  --color-accent: #F15A24;
+  /* Safety Orange */
+
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+  --spacing-xxl: 12rem;
+
+  --border-width: 1.5px;
+  --border-solid: var(--border-width) solid var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0A0A0A;
+    --color-surface: #111111;
+    --color-text: #F5F5F3;
+    --color-accent: #FF4500;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-display);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.3;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography Basics */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+p {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  padding: 0 var(--spacing-md);
+}
+
+.section {
+  position: relative;
+  border-bottom: var(--border-solid);
+}
+
+/* Base Buttons / Links */
+.btn-brutal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: transparent;
+  border: var(--border-solid);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-brutal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-text);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+
+.btn-brutal:hover {
+  color: var(--color-bg);
+}
+
+.btn-brutal:hover::before {
+  transform: scaleY(1);
+}
+
+.btn-accent {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* Utilities */
+.border-b {
+  border-bottom: var(--border-solid);
+}
+
+.border-t {
+  border-top: var(--border-solid);
+}
+
+.border-r {
+  border-right: var(--border-solid);
+}
+
+.border-l {
+  border-left: var(--border-solid);
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Marquee / Auto-Scroll Animation */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: var(--border-solid);
+  border-bottom: var(--border-solid);
+  background-color: var(--color-accent);
+  color: #111;
+  padding: 0.5rem 0;
+  display: flex;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-item {
+  padding: 0 2rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Specific Page Classes */
+.text-giant {
+  font-size: clamp(4rem, 15vw, 15rem);
+  line-height: 0.85;
+}
+
+.pt-header {
+  padding-top: max(100px, var(--spacing-xl));
+}
